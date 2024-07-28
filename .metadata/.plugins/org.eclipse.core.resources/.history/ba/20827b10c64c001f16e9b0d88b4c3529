@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>機器詳細</title>
+	<link rel="stylesheet" th:href="@{/css/Detail.css}">
+</head>
+
+<body>
+	<h1>機器詳細</h1>
+	<div class="detail-container">
+		<form th:action="@{/update/{id}(id=${device.id})}" method="post" th:object="${device}">
+			<table>
+				<tr>
+					<th>ID</th>
+					<td th:text="${device.id}"></td>
+					<th>変更不可</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>管理番号</th>
+					<td th:text="${device.management_cd}"></td>
+					<th>変更後</th>
+					<td><input type="text" th:field="*{management_cd}"></td>
+				</tr>
+				<tr>
+					<th>機器名</th>
+					<td th:text="${device.equipment_name}"></td>
+					<th>変更後</th>
+					<td><input type="text" th:field="*{equipment_name}"></td>
+				</tr>
+				<!-- Add other fields as needed -->
+			</table>
+			<div class="button-container">
+				<button class="button" type="submit">更新</button>
+			</div>
+		</form>
+		<form th:action="@{/delete}" method="post">
+			<input type="hidden" name="id" th:value="${device.id}" />
+			<button class="button" type="submit">削除</button>
+		</form>
+		<form th:action="@{/list}" method="get">
+			<button class="button" type="submit">機器一覧</button>
+		</form>
+		<form th:action="@{/top}" method="get">
+			<button class="button" type="submit">トップページ</button>
+		</form>
+	</div>
+</body>
+
+</html>

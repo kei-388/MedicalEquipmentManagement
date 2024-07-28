@@ -1,0 +1,45 @@
+package com.management.app.model;
+
+import java.util.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class DeviceModel {
+
+	@Id
+	@Column(name = "id")
+	private Integer id;
+	@Column(name = "id")
+	private String Management_cd;
+	@Column(name = "id")
+	private String Equipment_name;
+	@Column(name = "id")
+	private String Equipment_Type;
+	@Column(name = "id")
+	private String Notes;
+	@Column(name = "id")
+	private String Department;
+	@Column(name = "id")
+	private String Bought_Enterprise;
+	@Column(name = "id")
+	private Integer Useful_life;
+	@Column(name = "id")
+	private Date Use_Start_date;
+	@Column(name = "id")
+	private Date Use_End_date;
+	@Column(name = "id")
+	private Date Disposal_date;
+	@Column(name = "id")
+	private Boolean Disposal_flag;
+
+}

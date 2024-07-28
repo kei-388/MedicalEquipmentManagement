@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>登録成功</title>
+	<link rel="stylesheet" href="Success.css">
+</head>
+
+<body>
+	<dev class="WhiteBack">
+		<h2>処理が成功しました</h2>
+		<form th:action="@{/top}" method="get">
+			<button class="button">トップページに戻る</button>
+		</form>
+		<form th:action="@{/registration}" method="post">
+			<button class="button">登録</button>
+		</form>
+		<form th:action="@{/registration}" method="post">
+			<button class="button">登録</button>
+		</form>
+	</dev>
+</body>
+
+</html>

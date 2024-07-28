@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>機器登録フォーム</title>
+	<link rel="stylesheet" href="Registration.css">
+	<script src="Registration.js" defer></script>
+</head>
+
+<body>
+	<h1>新規登録</h1>
+	<div class="form-container">
+		<form class="form" action="/registration_device" method="post">
+			<label for="management-number">管理番号</label>
+			<input type="text" id="management-number" name="Management_cd" required>
+
+			<label for="device-name">機器名</label>
+			<input type="text" id="device-name" name="Equipment_name" required>
+
+			<label for="category">種別</label>
+			<input type="text" id="category" name="Equipment_Type" required>
+
+			<label for="remarks">備考</label>
+			<input type="text" id="remarks" name="Notes" required>
+
+			<label for="management-department">管理部署</label>
+			<input type="text" id="management-department" name="Department" required>
+
+			<label for="purchaser">購入業者</label>
+			<input type="text" id="purchaser" name="Bought_Enterprise" required>
+
+			<label for="years-of-use">耐用年数</label>
+			<input type="number" id="years-of-use" name="Useful_life" min="0" max="100" required>
+
+			<label for="start-date">使用開始日</label>
+			<input type="date" id="start-date" name="Use_Start_date" required>
+
+			<button type="submit">登録</button>
+		</form>
+	</div>
+	<form action="/top" method="get">
+		<button class="button">トップページ</button>
+	</form>
+</body>
+
+</html>

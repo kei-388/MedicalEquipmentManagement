@@ -1,0 +1,28 @@
+package com.management.app.service;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.management.app.model.DeviceModel;
+import com.management.app.repository.DeviceRepository;
+
+@Service
+public class DeviceService {
+
+	@Autowired
+	DeviceRepository repository;
+
+	public void setDevice(
+			Integer id, Integer Management_cd, String Equipment_name, String Equipment_Type,
+			String Notes, String Department, String Bought_Enterprise, Integer Useful_life,
+			Date Use_Start_date, Date Use_End_date, Date Disposal_date, Boolean Disposal_flag) {
+
+		DeviceModel deviceModel = new DeviceModel(
+				null, Management_cd, Equipment_name, Equipment_Type, Notes,
+				Department, Bought_Enterprise, Useful_life, Use_Start_date, null, null, false);
+				repository.save(deviceModel);
+	}
+
+}

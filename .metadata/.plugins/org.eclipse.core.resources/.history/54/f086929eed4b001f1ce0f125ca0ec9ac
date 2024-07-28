@@ -1,0 +1,5 @@
+package com.management.app.repository;
+
+public interface DeviceRepository extends JpaRepository<>{
+
+}

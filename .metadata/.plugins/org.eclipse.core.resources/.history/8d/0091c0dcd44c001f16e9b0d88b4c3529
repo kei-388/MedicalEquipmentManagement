@@ -1,0 +1,12 @@
+package com.management.app.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.management.app.model.DeviceModel;
+
+public interface DeviceRepository extends JpaRepository<DeviceModel, Integer> {
+
+	List<DeviceModel> findAllByOrderByIdAsc();
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>機器登録フォーム</title>
+	<link rel="stylesheet" href="Registration.css">
+</head>
+
+<body>
+	<h1>新規登録</h1>
+	<div class="form-container">
+		<form class="form" th:action="@{/registration_device}" method="post">
+			<label for="management-number">管理番号</label>
+			<input type="text" id="management-number" name="management-number">
+
+			<label for="management-department">管理部署</label>
+			<input type="text" id="management-department" name="management-department">
+
+			<label for="device-name">機器名</label>
+			<input type="text" id="device-name" name="device-name">
+
+			<label for="purchaser">購入業者</label>
+			<input type="text" id="purchaser" name="purchaser">
+
+			<label for="category">種別</label>
+			<input type="text" id="category" name="category">
+
+			<label for="years-of-use">耐用年数</label>
+			<input type="text" id="years-of-use" name="years-of-use">
+
+			<label for="remarks">使用開始日</label>
+			<input type="text" id="remarks" name="remarks">
+			
+			<label for="remarks">備考</label>
+			<input type="text" id="remarks" name="remarks">
+
+			<button type="submit">登録</button>
+		</form>
+		
+		
+		
+		<form th:action="@{/confirm}" method="post">
+			<div>
+				<label for="name">名前：</label>
+				<input type="text" name="name">
+			</div>
+			<div>
+				<label for="age">年齢：</label>
+				<input type="number" name="age" min="1" max="100">歳
+			</div>
+			<div>
+				<label for="birth">生年月日：</label>
+				<input type="date" name="birth">
+			</div>
+			<input type="submit" name="送信">
+		</form>
+		
+		
+		
+		
+		
+		
+	</div>
+	<form th:action="@{/top}" method="get">
+		<button class="button">トップページ</button>
+	</form>
+</body>
+
+</html>

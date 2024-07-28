@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>機器一覧</title>
+	<link rel="stylesheet" href="Top.css">
+</head>
+
+<body>
+	<h1>機器一覧</h1>
+	<!--▼▼▼ 機器情報が1件でもあれば表示 ▼▼▼-->
+	<div th:unless="${#lists.isEmpty(list)}">
+		<table border="1" style="table-layout: fixed;">
+			<tr>
+				<th>ID</th>
+				<th>管理番号</th>
+				<th>機器名</th>
+				<th>種別</th>
+				<th>備考</th>
+				<th>管理部署</th>
+				<th>調達先</th>
+				<th>耐用年数</th>
+				<th>使用開始日</th>
+				<th>使用終了日</th>
+				<th>廃棄</th>
+				<th>廃棄日</th>
+				<th>操作</th>
+			</tr>
+			<tr th:each="obj : ${list}" align="center">
+				<td th:text="${obj.id}"></td>
+				<td th:text="${obj.management_cd}" align="left"></td>
+				<td th:text="${obj.equipment_name}"></td>
+				<td th:text="${obj.equipment_type}"></td>
+				<td th:text="${obj.notes}"></td>
+				<td th:text="${obj.department}"></td>
+				<td th:text="${obj.bought_Enterprise}"></td>
+				<td th:text="${obj.useful_life}"></td>
+				<td th:text="${#dates.format(obj.use_start_date, 'yyyy-MM-dd')}"></td>
+				<td th:text="${#dates.format(obj.use_end_date, 'yyyy-MM-dd')}"></td>
+				<td th:text="${obj.disposal_flag ? 'はい' : 'いいえ'}"></td>
+				<td th:text="${#dates.format(obj.disposal_date, 'yyyy-MM-dd')}"></td>
+				<!-- 編集ボタン -->
+				<td>
+					<form method="GET" th:action="@{/device/{id}(id=${obj.id})}">
+						<input type="submit" value="編集">
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!--△△△ 機器情報が1件でもあれば表示 △△△-->
+	<!--▼▼▼ 機器情報が1件もない場合表示 ▼▼▼-->
+	<p th:if="${#lists.isEmpty(devicemodel)}">登録されている機器はありません。</p>
+	<!--△△△ 機器情報が1件もない場合表示 △△△-->
+	<div class="buttons">
+		<form th:action="@{/registration}" method="post">
+			<button class="button">新規登録</button>
+		</form>
+		<form th:action="@{/search}" method="post">
+			<button class="button">検索</button>
+		</form>
+		<form th:action="@{/top}" method="get">
+			<button class="button">トップページ</button>
+		</form>
+	</div>
+</body>
+
+</html>

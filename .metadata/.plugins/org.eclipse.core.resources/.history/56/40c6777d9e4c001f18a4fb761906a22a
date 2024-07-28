@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>機器一覧</title>
+	<link rel="stylesheet" href="Top.css">
+</head>
+
+<body>
+	<h1>機器一覧</h1>
+	<!--/* ▼▼▼ 機器情報が1件でもあれば表示 ▼▼▼ */-->
+	<table border="1" th:unless="${#lists.isEmpty(list)}" style="table-layout: fixed;">
+		<tr>
+			<th>ID</th>
+			<th>管理番号</th>
+			<th>機器名</th>
+			<th>種別</th>
+			<th>備考</th>
+			<th>管理部署</th>
+			<th>調達先</th>
+			<th>耐用年数</th>
+			<th>使用開始日</th>
+			<th>使用終了日</th>
+			<th>廃棄</th>
+			<th>廃棄日</th>			
+		</tr>
+		<tr th:each="obj : ${list}" align="center">
+			<td th:text="${obj.id}"></td>
+			<td th:text="${obj.question}" align="left"></td>
+			<td th:text="${obj.answer} == true?'〇':'×'"></td>
+			<td th:text="${obj.author}"></td>
+			<!--/* 編集ボタン */-->
+			<td>
+				<form method="GET" th:action="@{/quiz/{id}(id=${obj.id})}">
+					<input type="submit" value="編集">
+				</form>
+			</td>
+			<!--/* 削除ボタン */-->
+			<td>
+				<form method="POST" th:action="@{/quiz/delete}">
+					<input type="hidden" name="id" th:value="${obj.id}"> <input type="submit" value="削除">
+				</form>
+			</td>
+		</tr>
+	</table>
+	<!--/* △△△ 機器情報が1件でもあれば表示 △△△ */-->
+	<!--/* ▼▼▼ 機器情報が1件もない場合表示 ▼▼▼ */-->
+	<p th:if="${#lists.isEmpty(list)}">登録されている機器はありません。</p>
+	<!--/* △△△ クイズ情報が1件もない場合表示 △△△ */-->
+	</div>
+	<!--/* △△△ 新規登録時のみ表示 △△△ */-->
+	<!--/* ▼▼▼ 新規登録時でない時に表示 ▼▼▼ */-->
+	<p th:unless="${quizForm.newQuiz}">
+		<a href="#" th:href="@{/top}">トップページへ戻る</a>
+	</p>
+	<!--/* △△△ 新規登録時でない時に表示 △△△ */-->
+
+
+
+
+	<div class="buttons">
+		<form th:action="@{/registration}" method="post">
+			<button class="button">新規登録</button>
+		</form>
+		<form th:action="@{/search}" method="post">
+			<button class="button">検索</button>
+		</form>
+		<form th:action="@{/top}" method="get">
+			<button class="button">トップページ</button>
+		</form>
+</body>
+
+</html>

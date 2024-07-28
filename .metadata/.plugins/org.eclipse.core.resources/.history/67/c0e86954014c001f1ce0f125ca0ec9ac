@@ -1,0 +1,72 @@
+package com.management.app.model;
+
+import java.util.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class DeviceModel {
+
+	// 主キー
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	// 管理コード
+	@Column(name = "Management_cd")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String Management_cd;
+
+	// 機器名
+	@Column(name = "Equipment_name")
+	private String Equipment_name;
+
+	// 種別
+	@Column(name = "Equipment_Type")
+	private String Equipment_Type;
+
+	// 備考
+	@Column(name = "Notes")
+	private String Notes;
+
+	// 管理部門
+	@Column(name = "Department")
+	private String Department;
+
+	// 調達先
+	@Column(name = "Bought_Enterprise")
+	private String Bought_Enterprise;
+
+	// 耐用年数
+	@Column(name = "Useful_life")
+	private Integer Useful_life;
+
+	// 使用開始日
+	@Column(name = "Use_Start_date")
+	private Date Use_Start_date;
+
+	// 使用終了日
+	@Column(name = "Use_End_date")
+	private Date Use_End_date;
+
+	// 廃棄日
+	@Column(name = "Disposal_date")
+	private Date Disposal_date;
+
+	// 廃棄フラグ
+	@Column(name = "Disposal_flag")
+	private Boolean Disposal_flag;
+
+}

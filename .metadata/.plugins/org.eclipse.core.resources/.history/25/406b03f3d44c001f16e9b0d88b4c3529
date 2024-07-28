@@ -1,0 +1,73 @@
+package com.management.app.service;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.management.app.model.DeviceModel;
+import com.management.app.repository.DeviceRepository;
+
+@Service
+public class DeviceService {
+
+	@Autowired
+	DeviceRepository repository;
+
+	
+	public List<DeviceModel> searchDevices(Integer managementCd, String equipmentName, String equipmentType,
+			String notes,
+			String department, String boughtEnterprise, Integer usefulLife) {
+		return deviceRepository.searchDevices(managementCd, equipmentName, equipmentType, notes, department,
+				boughtEnterprise, usefulLife);
+	}
+
+	// ソート
+	public List<DeviceModel> getAllDevicesSortedById() {
+		return repository.findAllByOrderByIdAsc();
+	}
+
+	// 新規登録
+	public void setDevice(
+			Integer Management_cd, String Equipment_name, String Equipment_Type,
+			String Notes, String Department, String Bought_Enterprise, Integer Useful_life,
+			Date Use_Start_date) {
+		try {
+			DeviceModel deviceModel = new DeviceModel(
+					null, Management_cd, Equipment_name, Equipment_Type, Notes,
+					Department, Bought_Enterprise, Useful_life, Use_Start_date, null, null, false);
+			repository.save(deviceModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Failed to save device", e);
+		}
+	}
+
+	// 全件取得
+	public Iterable<DeviceModel> selectAll() {
+		return repository.findAll();
+	}
+
+	// 1権取得
+	public Optional<DeviceModel> selectOne(Integer id) {
+		return repository.findById(id);
+	}
+
+	// 更新
+	public void updateDevice(DeviceModel dm) {
+		repository.save(dm);
+	}
+
+	// 削除
+	public void deleteDevice(Integer id) {
+		repository.deleteById(id);
+	}
+
+	public DeviceModel findById(Integer id) {
+		Optional<DeviceModel> device = repository.findById(id);
+		return device.orElse(null);
+	}
+
+}

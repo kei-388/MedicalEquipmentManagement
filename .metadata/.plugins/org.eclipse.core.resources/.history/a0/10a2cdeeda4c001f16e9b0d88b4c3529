@@ -1,0 +1,122 @@
+package com.management.app.controller;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.management.app.model.DeviceModel;
+import com.management.app.service.DeviceService;
+
+@Controller
+public class DeviceController {
+
+	@Autowired
+	DeviceService service;
+
+	// Top画面　表示
+	@GetMapping("/top")
+	public String View_Top() {
+		return "Top";
+	}
+
+	// 登録画面　表示
+	@PostMapping("/registration")
+	public String View_Registration() {
+		return "Registration";
+	}
+
+	// 検索画面　表示
+	@PostMapping("/search")
+	public String View_Search() {
+		return "Search";
+	}
+
+	// 一覧画面　表示
+	@PostMapping("/list")
+	public String View_List(DeviceModel deviceModel, Model model) {
+		List<DeviceModel> list = service.getAllDevicesSortedById();
+		model.addAttribute("list", list);
+		return "List";
+	}
+
+	// 機器詳細画面　表示
+	@GetMapping("/device/{id}")
+	public String getDeviceDetail(@PathVariable("id") Integer id, Model model) {
+		DeviceModel device = service.findById(id);
+		model.addAttribute("device", device);
+		return "Detail";
+	}
+
+	// 機器登録　処理
+	@PostMapping("/registration_device")
+	public String registrationDevice(
+			@RequestParam Integer Management_cd,
+			@RequestParam String Equipment_name,
+			@RequestParam String Equipment_Type,
+			@RequestParam(required = false) String Notes,
+			@RequestParam String Department,
+			@RequestParam String Bought_Enterprise,
+			@RequestParam Integer Useful_life,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date Use_Start_date) {
+		try {
+			service.setDevice(Management_cd, Equipment_name, Equipment_Type, Notes, Department, Bought_Enterprise,
+					Useful_life, Use_Start_date);
+			return "Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error";
+		}
+	}
+
+	// 機器削除　処理
+	@PostMapping("/delete")
+	public String deleteDevice(@RequestParam Integer id) {
+		try {
+			service.deleteDevice(id);
+			return "Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error";
+		}
+	}
+
+	// 機器情報更新　処理
+	@PostMapping("/update/{id}")
+	public String updateDevice(@PathVariable Integer id, @ModelAttribute DeviceModel deviceModel) {
+		try {
+			deviceModel.setId(id);
+			// Add any additional validation or default values here if necessary
+			service.updateDevice(deviceModel);
+			return "/Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error";
+		}
+	}
+
+	// 検索　処理、結果　表示
+	@GetMapping("/search")
+	public String searchDevices(@RequestParam(required = false) Integer managementNumber,
+			@RequestParam(required = false) String deviceName,
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String remarks,
+			@RequestParam(required = false) String managementDepartment,
+			@RequestParam(required = false) String purchaser,
+			@RequestParam(required = false) Integer lifespan,
+			Model model) {
+		List<DeviceModel> devices = service.searchDevices(managementNumber, deviceName, type, remarks,
+				managementDepartment, purchaser, lifespan);
+		model.addAttribute("list", devices);
+		return "list";
+	}
+
+}

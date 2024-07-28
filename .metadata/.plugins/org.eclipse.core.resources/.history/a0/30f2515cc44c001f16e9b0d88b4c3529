@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>機器詳細</title>
+	<link rel="stylesheet" th:href="@{/css/Detail.css}">
+</head>
+
+<body>
+	<h1>機器詳細</h1>
+	<div class="detail-container">
+		<form th:action="@{/update}" method="post">
+			<table>
+				<tr>
+					<th>ID</th>
+					<td th:text="${device.id}"></td>
+					<th>変更不可</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>管理番号</th>
+					<td th:text="${device.management_cd}"></td>
+					<th>変更後</th>
+					<td><input type="text" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+				<tr>
+					<th>機器名</th>
+					<td th:text="${device.equipment_name}"></td>
+					<th>変更後</th>
+					<td><input type="text" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+				<tr>
+					<th>種別</th>
+					<td th:text="${device.equipment_type}"></td>
+					<th>変更後</th>
+					<td><input type="text" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+				<tr>
+					<th>備考</th>
+					<td th:text="${device.notes}"></td>
+					<th>変更後</th>
+					<td><input type="text" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+				<tr>
+					<th>管理部署</th>
+					<td th:text="${device.department}"></td>
+					<th>変更後</th>
+					<td><input type="text" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+				<tr>
+					<th>調達先</th>
+					<td th:text="${device.bought_Enterprise}"></td>
+					<th>変更後</th>
+					<td><input type="text" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+				<tr>
+					<th>耐用年数</th>
+					<td th:text="${device.useful_life}"></td>
+					<th>変更後</th>
+					<td><input type="number"  min="0" max="100" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+				<tr>
+					<th>使用開始日</th>
+					<td th:text="${#dates.format(device.use_start_date, 'yyyy-MM-dd')}"></td>
+					<th>変更後</th>
+					<td><input type="date" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+				<tr>
+					<th>使用終了日</th>
+					<td th:text="${#dates.format(device.use_end_date, 'yyyy-MM-dd')}"></td>
+					<th>変更後</th>
+					<td><input type="date" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+				<tr>
+					<th>廃棄</th>
+					<td th:text="${device.disposal_flag ? '廃棄済' : '未廃棄'}"></td>
+					<th>変更後</th>
+					<td><input type="text" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+				<tr>
+					<th>廃棄日</th>
+					<td th:text="${#dates.format(device.disposal_date, 'yyyy-MM-dd')}"></td>
+					<th>変更後</th>
+					<td><input type="date" th:field="*{id}" th:value="${device.id}" readonly></td>
+				</tr>
+			</table>
+			<div class="button-container">
+				<button class="button" type="submit">更新(実装中)</button>
+		</form>
+		<form th:action="@{/delete}" method="post">
+			<button class="button">削除(実装中)</button>
+		</form>
+		<form th:action="@{/list}" method="post">
+			<button class="button">機器一覧</button>
+		</form>
+		<form th:action="@{/top}" method="get">
+			<button class="button">トップページ</button>
+		</form>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+package com.management.app.service;
+
+import java.util.Date;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.management.app.model.DeviceModel;
+import com.management.app.repository.DeviceRepository;
+
+@Service
+public class DeviceService {
+
+	@Autowired
+	DeviceRepository repository;
+
+	public void setDevice(
+			String Equipment_name, String Equipment_Type,
+			String Notes, String Department, String Bought_Enterprise, Integer Useful_life,
+			Date Use_Start_date, Date Use_End_date, Date Disposal_date, Boolean Disposal_flag) {
+
+		DeviceModel deviceModel = new DeviceModel(
+				null, null, Equipment_name, Equipment_Type, Notes,
+				Department, Bought_Enterprise, Useful_life, Use_Start_date, null, null, false);
+		repository.save(deviceModel);
+	}
+
+	// 全件取得
+	public Iterable<DeviceModel> selectAll() {
+		return repository.findAll();
+	}
+
+	// 1権取得
+	public Optional<DeviceModel> selectOne(Integer id) {
+		return repository.findById(id);
+	}
+
+	// 更新
+	public void updateDevice(DeviceModel dm) {
+		repository.save(dm);
+	}
+
+	// 削除
+	public void deleteDevice(Integer id) {
+		repository.deleteById(id);
+	}
+
+}

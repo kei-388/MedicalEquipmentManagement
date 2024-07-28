@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>機器検索フォーム</title>
+	<link rel="stylesheet" href="Search.css">
+</head>
+
+<body>
+	<h1>機器検索</h1>
+	<form>
+		<div class="form-container">
+			<div class="form-column">
+				<label for="management-number">管理番号</label>
+				<input type="text" id="management-number" name="management-number">
+
+				<label for="device-name">機器名</label>
+				<input type="text" id="device-name" name="device-name">
+
+				<label for="type">種別</label>
+				<input type="text" id="type" name="type">
+
+				<label for="remarks">備考</label>
+				<input type="text" id="remarks" name="remarks">
+			</div>
+			<div class="form-column">
+				<label for="management-department">管理部署</label>
+				<input type="text" id="management-department" name="management-department">
+
+				<label for="purchaser">購入業者</label>
+				<input type="text" id="purchaser" name="purchaser">
+
+				<label for="lifespan">耐用年数</label>
+				<input type="text" id="lifespan" name="lifespan">
+			</div>
+		</div>
+		<div class="button-container">
+			<form th:action="@{/search}" method="post">
+				<button type="submit">検索(実装中)</button>
+			</form>
+			<form th:action="@{/top}" method="get">
+				<button class="button">トップページ</button>
+			</form>
+		</div>
+	</form>
+</body>
+
+</html>

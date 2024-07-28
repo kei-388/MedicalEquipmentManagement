@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>機器管理フォーム</title>
+</head>
+
+<body>
+	<div class="form-container">
+		<form class="form">
+			<label for="management-number">管理番号</label>
+			<input type="text" id="management-number" name="management-number">
+
+			<label for="management-department">管理部署</label>
+			<input type="text" id="management-department" name="management-department">
+
+			<label for="device-name">機器名</label>
+			<input type="text" id="device-name" name="device-name">
+
+			<label for="purchaser">購入業者</label>
+			<input type="text" id="purchaser" name="purchaser">
+
+			<label for="category">種別</label>
+			<input type="text" id="category" name="category">
+
+			<label for="years-of-use">耐用年数</label>
+			<input type="text" id="years-of-use" name="years-of-use">
+
+			<label for="remarks">備考</label>
+			<input type="text" id="remarks" name="remarks">
+
+			<button type="submit">登録</button>
+		</form>
+	</div>
+</body>
+
+</html>

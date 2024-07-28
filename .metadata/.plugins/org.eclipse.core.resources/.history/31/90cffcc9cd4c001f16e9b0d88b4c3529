@@ -1,0 +1,100 @@
+package com.management.app.controller;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.management.app.model.DeviceModel;
+import com.management.app.service.DeviceService;
+
+@Controller
+public class DeviceController {
+
+	@Autowired
+	DeviceService service;
+
+	@GetMapping("/top")
+	public String View_Top() {
+		return "Top";
+	}
+
+	@PostMapping("/registration")
+	public String View_Registration() {
+		return "Registration";
+	}
+
+	@PostMapping("/search")
+	public String View_Search() {
+		return "Search";
+	}
+
+	@PostMapping("/list")
+	public String View_List(DeviceModel deviceModel, Model model) {
+		List<DeviceModel> list = service.getAllDevicesSortedById();
+		model.addAttribute("list", list);
+		return "List";
+	}	
+	
+	// 機器登録
+	@PostMapping("/registration_device")
+	public String registrationDevice(
+			@RequestParam Integer Management_cd,
+			@RequestParam String Equipment_name,
+			@RequestParam String Equipment_Type,
+			@RequestParam(required = false) String Notes,
+			@RequestParam String Department,
+			@RequestParam String Bought_Enterprise,
+			@RequestParam Integer Useful_life,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date Use_Start_date) {
+		try {
+			service.setDevice(Management_cd, Equipment_name, Equipment_Type, Notes, Department, Bought_Enterprise,
+					Useful_life, Use_Start_date);
+			return "Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error";
+		}
+	}
+
+	@GetMapping("/device/{id}")
+	public String getDeviceDetail(@PathVariable("id") Integer id, Model model) {
+		DeviceModel device = service.findById(id);
+		model.addAttribute("device", device);
+		return "Detail";
+	}
+
+	@PostMapping("/delete")
+	public String deleteDevice(@RequestParam Integer id) {
+		try {
+			service.deleteDevice(id);
+			return "Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error";
+		}
+	}
+
+	@PostMapping("/update/{id}")
+	public String updateDevice(@PathVariable Integer id, @ModelAttribute DeviceModel deviceModel) {
+		try {
+			deviceModel.setId(id);
+			// Add any additional validation or default values here if necessary
+			service.updateDevice(deviceModel);
+			return "Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error";
+		}
+	}
+
+
+}
